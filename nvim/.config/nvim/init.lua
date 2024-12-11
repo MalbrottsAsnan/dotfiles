@@ -30,6 +30,6 @@ HACK: Stuff marked with this are custom configs and code in addition to the chan
 -- Load vim.g, vim.opt, and other settings before anything else
 require('globals')
 
--- Load almost all keymaps
+-- Load almost all keymaps as well as autocommands
 require('keymaps')
 
