@@ -5,7 +5,7 @@
 --   scrollD = "<C-d>",
 --   jumpTop = "gg",
 --   jumpBot = "G",
--- Use TAB to navigate out from the preview
+-- Use TAB to navigate out from the preview or "q" to exit directly
 -- Check the "z" keymaps for folding, I primarily use "za" and "zA"
 
 -- HACK: During preview, press ENTER to jump directly to the line! So nice!
