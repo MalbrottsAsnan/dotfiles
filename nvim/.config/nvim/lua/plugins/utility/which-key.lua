@@ -50,6 +50,12 @@ return {
                 { "<leader>t", group = "[T]oggle" },
                 { "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
             },
+
+            -- HACK: Rebind the "s" keymap so that mini.surround doesn't conflict with the default Neovim mappings. Doing this here ensures you can find the keymaps with which-key.
+            triggers = {
+                { "<auto>", mode = "nixsotc" },
+                { "s", mode = { "n", "v" } },
+            },
         },
     },
 }
