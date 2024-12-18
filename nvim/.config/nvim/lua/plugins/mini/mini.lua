@@ -34,6 +34,49 @@ return {
 
             -- ... and there is more!
             --  Check out: https://github.com/echasnovski/mini.nvim
+
+            -- HACK: Animated environment
+            -- This is eye candy :)
+            require("mini.animate").setup({
+                cursor = { enable = false },
+                scroll = {
+                    -- Animate equally but with at most 180 steps instead of default 60
+                    subscroll = require("mini.animate").gen_subscroll.equal({ max_output_steps = 180 }),
+                },
+            })
+
+            -- HACK: Nice tabline
+            require("mini.tabline").setup()
+
+            -- HACK: Add move-functionality
+            -- Alt (Meta) + hjkl
+            -- Works with both lines in normal mode and selections in visual mode
+            require("mini.move").setup()
+
+            -- HACK: Add session functionality
+            -- :mksession ~/session_name
+            -- This creates a file in user home directory which can later be deleted
+            -- Works with mini.starter!
+            require("mini.sessions").setup({ file = "" })
+
+            -- HACK: Session commands
+            vim.api.nvim_create_user_command("MinishGo", function()
+                local sessions = require("mini.sessions")
+                sessions.select("read", { force = false })
+            end, { desc = "Select session in popup" })
+
+            vim.api.nvim_create_user_command("MinishMake", function(args)
+                local sessions = require("mini.sessions")
+
+                local name = string.match(args["args"], "([^%s]+)")
+
+                sessions.write(name, { force = false })
+            end, { desc = "Create session, overriding disabled", nargs = 1 })
+
+            vim.api.nvim_create_user_command("MinishPop", function()
+                local sessions = require("mini.sessions")
+                sessions.select("delete", { force = true })
+            end, { desc = "Delete session in popup" })
         end,
     },
 }
