@@ -108,6 +108,44 @@ return {
                     require("mini.starter").gen_hook.aligning("center", "center"),
                 },
             })
+
+            -- HACK: Display map of the current buffer
+            require("mini.map").setup({
+                symbols = {
+                    encode = require("mini.map").gen_encode_symbols.dot("4x2"),
+                },
+                integrations = {
+                    require("mini.map").gen_integration.builtin_search(),
+                    require("mini.map").gen_integration.gitsigns(),
+                    require("mini.map").gen_integration.diagnostic(),
+                },
+                window = {
+                    show_integration_count = false,
+
+                    winblend = 10,
+                },
+            })
+
+            vim.keymap.set("n", "<Leader>mf", MiniMap.toggle_focus)
+            vim.keymap.set("n", "<Leader>ms", MiniMap.toggle_side)
+            vim.keymap.set("n", "<Leader>mt", MiniMap.toggle)
+
+            -- HACK: Autocommand on file open
+            vim.api.nvim_create_autocmd({ "BufAdd", "BufNewFile" }, {
+                callback = function()
+                    MiniMap.open()
+                end,
+            })
+
+            -- HACK: Nice notifications
+            require("mini.notify").setup({
+                lsp_progress = {
+                    enable = false,
+                },
+                window = {
+                    winblend = 10,
+                },
+            })
         end,
     },
 }
