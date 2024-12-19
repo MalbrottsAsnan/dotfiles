@@ -67,9 +67,7 @@ return {
 
             vim.api.nvim_create_user_command("MinishMake", function(args)
                 local sessions = require("mini.sessions")
-
                 local name = string.match(args["args"], "([^%s]+)")
-
                 sessions.write(name, { force = false })
             end, { desc = "Create session, overriding disabled", nargs = 1 })
 
@@ -77,6 +75,39 @@ return {
                 local sessions = require("mini.sessions")
                 sessions.select("delete", { force = true })
             end, { desc = "Delete session in popup" })
+
+            -- HACK: Header for starter screen
+            local function starterheader()
+                local hour = tonumber(vim.fn.strftime("%H"))
+                -- [04:00, 12:00) - morning, [12:00, 20:00) - day, [20:00, 04:00) - evening
+                local part_id = math.floor((hour + 4) / 8) + 1
+                local day_part = ({ "evening", "morning", "afternoon", "evening" })[part_id]
+                local username = os.getenv("USER")
+                local logo =
+                    "                                                    \n ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ \n ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ \n ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ \n ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ \n ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ \n ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ \n                                                    \n"
+
+                local greeting = ("Good %s, %s"):format(day_part, username)
+
+                return logo .. greeting
+            end
+
+            -- HACK: Add starters screen, nvim with no arguments
+            require("mini.starter").setup({
+                header = starterheader(),
+                items = {
+                    -- Use this if you set up "mini.sessions"
+                    require("mini.starter").sections.sessions(3, true),
+
+                    require("mini.starter").sections.telescope(),
+
+                    require("mini.starter").sections.recent_files(10, false),
+                },
+                content_hooks = {
+                    require("mini.starter").gen_hook.adding_bullet(),
+
+                    require("mini.starter").gen_hook.aligning("center", "center"),
+                },
+            })
         end,
     },
 }
