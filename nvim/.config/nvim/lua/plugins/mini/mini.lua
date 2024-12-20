@@ -131,7 +131,7 @@ return {
             vim.keymap.set("n", "<Leader>mt", MiniMap.toggle)
 
             -- HACK: Autocommand on file open
-            vim.api.nvim_create_autocmd({ "BufAdd", "BufNewFile" }, {
+            vim.api.nvim_create_autocmd({ "BufAdd", "BufRead", "BufNewFile" }, {
                 callback = function()
                     MiniMap.open()
                 end,
