@@ -49,14 +49,4 @@ return {
         --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
         --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     },
-    -- HACK: Adds context to se what scope you are working in!
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        config = function()
-            require("treesitter-context").setup({
-                max_lines = 5,
-                separator = " ",
-            })
-        end,
-    },
 }
