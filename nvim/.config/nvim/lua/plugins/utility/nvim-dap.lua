@@ -23,6 +23,7 @@ return {
 
         -- Add your own debuggers here
         "leoluz/nvim-dap-go",
+        "vadimcn/codelldb",
     },
     keys = {
         -- Basic debugging keymaps, feel free to change to your liking!
@@ -95,6 +96,7 @@ return {
             ensure_installed = {
                 -- Update this to ensure that you have the debuggers for the langs you want
                 "delve",
+                "codelldb",
             },
         })
 
@@ -144,5 +146,18 @@ return {
                 detached = vim.fn.has("win32") == 0,
             },
         })
+
+        require("dap").configurations.rust = {
+            {
+                name = "Launch file",
+                type = "codelldb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+                end,
+                cwd = "${workspaceFolder}/target/debug/",
+                stopOnEntry = false,
+            },
+        }
     end,
 }
