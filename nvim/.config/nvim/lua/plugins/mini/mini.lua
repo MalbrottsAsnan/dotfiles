@@ -8,7 +8,37 @@ return {
             --  - va)  - [V]isually select [A]round [)]paren
             --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
             --  - ci'  - [C]hange [I]nside [']quote
-            require("mini.ai").setup({ n_lines = 500 })
+            require("mini.ai").setup({
+                n_lines = 500,
+
+                -- HACK: More textobject support! With the nvim-treesitter-textobjects plugin, we get access to things like:
+                -- - Function definition
+                -- - Class definition
+
+                -- HACK: Uncapitalized = mini.ai native - Capitalized = treesitter-textobjects native
+
+                -- HACK: Treesitter's incremental selection, together with treesitter-textobjects and mini.ai makes for
+                -- a fast and pleasant textobject experience!
+                custom_textobjects = {
+                    -- "f" is built into mini.ai as "function call", this expands functionality to include function definition
+                    F = require("mini.ai").gen_spec.treesitter({
+                        a = "@function.outer",
+                        i = "@function.inner",
+                    }),
+                    C = require("mini.ai").gen_spec.treesitter({
+                        a = "@class.outer",
+                        i = "@class.inner",
+                    }),
+                    L = require("mini.ai").gen_spec.treesitter({
+                        a = "@loop.outer",
+                        i = "@loop.inner",
+                    }),
+                    O = require("mini.ai").gen_spec.treesitter({
+                        a = "@conditional.outer",
+                        i = "@conditional.inner",
+                    }),
+                },
+            })
 
             -- Add/delete/replace surroundings (brackets, quotes, etc.)
             --
