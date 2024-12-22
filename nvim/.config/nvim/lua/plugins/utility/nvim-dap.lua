@@ -23,6 +23,7 @@ return {
 
         -- Add your own debuggers here
         "leoluz/nvim-dap-go",
+        -- HACK: For debuggin rust, cpp, etc.
         "vadimcn/codelldb",
     },
     keys = {
@@ -96,6 +97,7 @@ return {
             ensure_installed = {
                 -- Update this to ensure that you have the debuggers for the langs you want
                 "delve",
+                -- HACK: For debugging rust, cpp, etc.
                 "codelldb",
             },
         })
@@ -147,15 +149,20 @@ return {
             },
         })
 
+        -- HACK: Custom rust debug configuration, assuming you are working with cargo but still adaptable
         require("dap").configurations.rust = {
             {
                 name = "Launch file",
                 type = "codelldb",
                 request = "launch",
                 program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+                    return vim.fn.input(
+                        "Path to executable: ",
+                        vim.fn.getcwd() .. "/target/debug/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
+                        "file"
+                    )
                 end,
-                cwd = "${workspaceFolder}/target/debug/",
+                cwd = "${workspaceFolder}/target/debug",
                 stopOnEntry = false,
             },
         }
