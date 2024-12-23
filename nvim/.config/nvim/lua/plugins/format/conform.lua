@@ -32,6 +32,9 @@ return {
                 }
             end,
             formatters_by_ft = {
+                -- HACK: Added rust in here :)
+                rust = { "rustfmt" },
+
                 lua = { "stylua" },
                 -- Conform can also run multiple formatters sequentially
                 -- python = { "isort", "black" },
