@@ -5,6 +5,9 @@ return {
         config = function()
             local lint = require("lint")
             lint.linters_by_ft = {
+                -- HACK: Added clippy (for rust) :)
+                rust = { "clippy" },
+
                 markdown = { "markdownlint" },
             }
 
