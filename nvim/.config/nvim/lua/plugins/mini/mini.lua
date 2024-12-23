@@ -62,6 +62,25 @@ return {
                 return "%2l:%-2v"
             end
 
+            -- HACK: Overwrite filename with percentage + current session + filename
+            ---@diagnostic disable-next-line: duplicate-set-field
+            statusline.section_filename = function()
+                local session = vim.fn.fnamemodify(vim.v.this_session, ":t")
+                if session == "" then
+                    session = "No Session"
+                end
+
+                local ends = vim.fn.line("$") - 1
+                local starts = vim.fn.line(".") - 1
+                local percentage = math.floor(starts * 100 / ends)
+
+                if percentage == "nan" then
+                    percentage = 0
+                end
+
+                return "  " .. percentage .. "％" .. "  󰉉 " .. session .. "  " .. vim.fn.expand("%")
+            end
+
             -- ... and there is more!
             --  Check out: https://github.com/echasnovski/mini.nvim
 
