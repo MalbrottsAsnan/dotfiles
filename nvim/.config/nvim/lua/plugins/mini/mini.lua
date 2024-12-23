@@ -74,7 +74,8 @@ return {
                 local starts = vim.fn.line(".") - 1
                 local percentage = math.floor(starts * 100 / ends)
 
-                if percentage == "nan" then
+                -- HACK: Check for "nan" condition if buffer is empty
+                if percentage ~= percentage then
                     percentage = 0
                 end
 
