@@ -1,0 +1,28 @@
+# This Makefile is only intended to define default configurations to be used by other profiles!
+# When creating profiles, include this file and define "stow" and "unstow" targets as this:
+
+# include ../common/MakefileCommon
+# stow:
+	# contents
+# unstow:
+	# contents
+
+common:
+	@ echo "Use targets stow/unstow!"
+
+# Define the directory where the configurations are stored
+COMMON_CONFIG_DIR := ../../configurations
+
+# Define the directory where the symlinks are placed by GNU Stow
+COMMON_TARGET_DIR = $(XDG_CONFIG_HOME)
+
+# Check if XDG_CONFIG_HOME is empty and set variable to "$HOME/.config" instead
+ifeq ($(XDG_CONFIG_HOME),)
+	COMMON_TARGET_DIR = $(HOME)/.config
+endif
+
+# Define the default GNU Stow command, the --dotfiles option is used to translate "dot-filename" into ".filename"
+COMMON_STOW_CMD := stow --dotfiles --dir=$(COMMON_CONFIG_DIR) --target=$(COMMON_TARGET_DIR)
+
+# Define the default command to "unstow" all symlinks placed by GNU Stow
+COMMON_UNSTOW_CMD := $(COMMON_STOW_CMD) --delete
