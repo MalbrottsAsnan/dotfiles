@@ -3,7 +3,7 @@
 keybinds clear-defaults=true {
     locked {
         // Added Alt to not conflict with nvim
-        bind "Ctrl Alt g" { SwitchToMode "normal"; }
+        bind "ä" { SwitchToMode "normal"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -151,7 +151,7 @@ keybinds clear-defaults=true {
         bind "Alt o" { MoveTab "right"; }
     }
     shared_except "locked" "renametab" "renamepane" {
-        bind "Ctrl g" { SwitchToMode "locked"; }
+        bind "ä" { SwitchToMode "locked"; }
         bind "Ctrl q" { Quit; }
     }
     shared_except "locked" "entersearch" {
