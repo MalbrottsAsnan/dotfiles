@@ -2,7 +2,7 @@
 include ../.common/MakefileCommon
 
 # The configurations applied by this profile. Example: "CONFIGS := nvim tmux zsh"
-CONFIGS := nvim
+CONFIGS := nvim tmux
 
 stow:
 	$(COMMON_STOW_CMD) $(CONFIGS)
