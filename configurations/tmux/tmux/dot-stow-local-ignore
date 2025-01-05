@@ -1,0 +1,2 @@
+# Ignore symlinking and git tracking the plugins directory that gets created at this location by TPM
+plugins/
