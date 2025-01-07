@@ -16,3 +16,17 @@
 #
 # You can remove these comments if you want or leave
 # them for future reference.
+
+# Configure starship (https://starship.rs/guide/)
+mut starship_cfg_dir = ""
+
+if "XDG_CONFIG_HOME" in $env {
+	$starship_cfg_dir = $env.XDG_CONFIG_HOME
+} else {
+	$starship_cfg_dir = $env.HOME | path join ".config"
+}
+
+$env.STARSHIP_CONFIG = $starship_cfg_dir | path join "starship/starship.toml"
+
+mkdir ~/.cache/starship
+starship init nu | save -f ~/.cache/starship/init.nu
