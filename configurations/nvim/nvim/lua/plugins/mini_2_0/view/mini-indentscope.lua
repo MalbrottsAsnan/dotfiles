@@ -1,0 +1,4 @@
+require("mini.indentscope").setup()
+
+
+-- CHEKC IF MAPPINGS ARE COLLIDING AND IF THEY SHOULD BE ADDED TO MINI.CLUE
