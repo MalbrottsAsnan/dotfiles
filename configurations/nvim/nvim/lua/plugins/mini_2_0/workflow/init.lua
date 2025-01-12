@@ -5,3 +5,4 @@ local require_path = getRelativePathFromDebug(debug.getinfo(1))
 -- Utility End
 
 require(require_path .. "mini-git")
+require(require_path .. "mini-diff")
