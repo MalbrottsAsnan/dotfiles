@@ -9,7 +9,19 @@ require('mini.statusline').setup({ use_icons = vim.g.have_nerd_font })
             -- cursor location to LINE:COLUMN
             ---@diagnostic disable-next-line: duplicate-set-field
             require('mini.statusline').section_location = function()
-                return "%2l:%-2v"
+
+		    -- HACK: EVEN MORE SHENNANIGIGAGANANS
+
+		local ends = vim.fn.line("$") - 1
+		local starts = vim.fn.line(".") - 1
+		local percentage = math.floor(starts * 100 / ends)
+
+		-- HACK: Check for "nan" condition if buffer is empty
+		if percentage ~= percentage then
+		  percentage = 0
+	  	end
+
+                return percentage .. "％" .. "%2l:%-2v"
             end
 
 -- HACK: Overwrite filename with percentage + current session + filename
@@ -20,16 +32,17 @@ require('mini.statusline').setup({ use_icons = vim.g.have_nerd_font })
                     session = "No Session"
                 end
 
-                local ends = vim.fn.line("$") - 1
-                local starts = vim.fn.line(".") - 1
-                local percentage = math.floor(starts * 100 / ends)
+                -- local ends = vim.fn.line("$") - 1
+                -- local starts = vim.fn.line(".") - 1
+                -- local percentage = math.floor(starts * 100 / ends)
 
-                -- HACK: Check for "nan" condition if buffer is empty
-                if percentage ~= percentage then
-                    percentage = 0
-                end
+                -- -- HACK: Check for "nan" condition if buffer is empty
+                -- if percentage ~= percentage then
+                    -- percentage = 0
+                -- end
 
-                return "  " .. percentage .. "％" .. "  󰉉 " .. session .. "  " .. vim.fn.expand("%")
+                -- return "  " .. percentage .. "％" .. "  󰉉 " .. session .. "  " .. vim.fn.expand("%")
+		return "   " .. session .. "    " .. vim.fn.expand("%")
             end
 
 
