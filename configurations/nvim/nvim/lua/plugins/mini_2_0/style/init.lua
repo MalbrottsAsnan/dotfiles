@@ -6,3 +6,4 @@ local require_path = getRelativePathFromDebug(debug.getinfo(1))
 
 require(require_path .. "colorscheme")
 require(require_path .. "mini-icons")
+require(require_path .. "mini-animate")
