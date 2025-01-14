@@ -9,7 +9,7 @@ local setup = function()
   })
 end
 
-setup() -- Call the setup, for easy disabling
+-- BUG: This currently causes lagging mouse setup() -- Call the setup, for easy disabling
 
 -- Return empty table to lazy.nvim
 return {}
