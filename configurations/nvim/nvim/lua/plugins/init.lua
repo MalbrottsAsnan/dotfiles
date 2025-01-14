@@ -8,4 +8,5 @@ return {
 	{ import = "plugins/view" },
 	{ import = "plugins/edit" },
 	{ import = "plugins/utility" },
+	{ import = "plugins/workflow" },
 }
