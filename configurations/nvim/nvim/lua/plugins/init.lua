@@ -6,4 +6,5 @@ return {
 	-- Import plugin categories, lazy.nvim will run all *lua files and load any returned tables
 	{ import = "plugins/style" },
 	{ import = "plugins/edit" },
+	{ import = "plugins/utility" },
 }
