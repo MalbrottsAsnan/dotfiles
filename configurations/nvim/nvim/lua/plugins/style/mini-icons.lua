@@ -1,3 +1,4 @@
+-- Icon provider
 -- Set up the mini.nvim module
 require("mini.icons").setup()
 

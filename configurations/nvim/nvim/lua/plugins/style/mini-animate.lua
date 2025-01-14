@@ -1,3 +1,4 @@
+-- Nice, configurable animations of movements inside buffer
 -- Set up the mini.nvim module
 local setup = function()
   require("mini.animate").setup({
