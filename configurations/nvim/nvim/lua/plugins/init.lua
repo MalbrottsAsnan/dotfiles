@@ -4,5 +4,6 @@ return {
 	{ 'echasnovski/mini.nvim', version = false },	
 
 	-- Import plugin categories, lazy.nvim will run all *lua files and load any returned tables
-	{ import = "plugins/style" }
+	{ import = "plugins/style" },
+	{ import = "plugins/edit" },
 }
