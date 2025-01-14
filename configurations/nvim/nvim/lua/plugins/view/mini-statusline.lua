@@ -1,5 +1,5 @@
 -- Set up the mini.nvim module
-require("mini.statusline").setup({ use_icons = vim.g.have_nerd_font }) -- set use_icons to true if you have a Nerd Font
+require("mini.statusline").setup({ use_icons = vim.g.have_nerd_font }) -- Use icons if you have a Nerd Font
 
 -- Set the "location" section to show PERCENTAGE LINE:COLUMN
 ---@diagnostic disable-next-line: duplicate-set-field
