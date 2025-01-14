@@ -1,24 +1,8 @@
-return {
-    -- { import = "plugins.style" },
-    -- { import = "plugins.mini" },
-    -- { import = "plugins.format" },
-    -- { import = "plugins.utility" },
-    -- { import = "plugins.treesitter" },
-    -- { import = "plugins.lsp" },
+-- The starting point for the plugin configuration with lazy.nvim
+return { 
+	-- First load the mini.nvim plugin so that its modules can be set up in individual files
+	{ 'echasnovski/mini.nvim', version = false },	
 
-    -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
-    -- init.lua. If you want these files, they are in the repository, so you can just download them and
-    -- place them in the correct locations.
-
-    -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-    --
-    --  Here are some example plugins that I've included in the Kickstart repository.
-    --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-    --
-    -- require 'kickstart.plugins.debug',
-    -- require 'kickstart.plugins.indent_line',
-    -- require 'kickstart.plugins.lint',
-    -- require 'kickstart.plugins.autopairs',
-    -- require 'kickstart.plugins.neo-tree',
-    -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+	-- Import plugin categories, lazy.nvim will run all *lua files and load any returned tables
+	{ import = "plugins/style" }
 }

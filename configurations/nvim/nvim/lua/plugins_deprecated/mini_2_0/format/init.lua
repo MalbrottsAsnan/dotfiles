@@ -3,4 +3,5 @@ require('utility')
 
 local require_path = getRelativePathFromDebug(debug.getinfo(1))
 -- Utility End
-require(require_path .. "mini-files")
+
+require(require_path .. "conform")
