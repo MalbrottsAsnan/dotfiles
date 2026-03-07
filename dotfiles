@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}" 
+
+die() { printf 'Error: %s\n' "$*" >&2; exit 1; }
+
+need_cmd() {
+  command -v "$1" >/dev/null 2>&1 || die "Missing dependency: '$1' (install it and try again)"
+}
+
+show_help() {
+    cat <<EOF
+Usage: ${0##*/} <command> [options] package...
+
+Commands:
+    install  Symlink this script into ~/.local/bin.
+    stow     Stow (symlink) packages to \$XDG_CONFIG_HOME ($XDG_CONFIG_HOME).
+    unstow   Remove the symlinks from stowed packages.
+    help     Show this help message.
+
+Options:
+    All standard GNU Stow options are available except for 'dotfiles', 'target', and 'delete'.
+
+Examples:
+    ${0##*/} install
+    ${0##*/} stow nvim tmux
+    ${0##*/} stow starship --dir ~/starship_config
+    ${0##*/} unstow nushell
+EOF
+}
+
+do_install() {
+    local bin_dir="$HOME/.local/bin"
+    local script bin_name
+    script="$(realpath "$0")"
+    bin_name="$(basename "$script")"
+    mkdir -p "$bin_dir"
+    ln -sf "$script" "$bin_dir/$bin_name"
+    printf 'Installed: %s -> %s\n' "$bin_dir/$bin_name" "$script"
+}
+
+do_stow() {
+    need_cmd stow
+    [[ $# -gt 0 ]] || die "No packages provided. Try: ${0##*/} stow <packages...>"
+    stow --dotfiles --target="$XDG_CONFIG_HOME" "$@"
+}
+do_unstow() {
+    need_cmd stow
+    [[ $# -gt 0 ]] || die "No packages provided. Try: ${0##*/} unstow <packages...>"
+    stow --dotfiles --target="$XDG_CONFIG_HOME" --delete "$@"
+}
+
+cmd="${1:-help}"
+shift || true
+
+case "$cmd" in
+    install)        do_install "$@" ;;
+    stow)           do_stow "$@" ;;
+    unstow)         do_unstow "$@" ;;
+    help|-h|--help) show_help ;;
+    *)              printf 'Unknown command: %s\n\n' "$cmd" >&2; show_help; exit 2 ;;
+esac
