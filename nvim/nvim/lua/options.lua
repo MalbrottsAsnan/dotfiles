@@ -1,4 +1,8 @@
--- [[ Editor Display Options ]]
+--[[
+
+    Editor Display Options
+
+--]]
 
 -- Show relative line numbers by default
 vim.opt.number = true
@@ -19,7 +23,11 @@ vim.opt.showmode = false
 -- Nice 24-bit colors if the terminal emulator supports it!
 vim.opt.termguicolors = true
 
--- [[ Text Display Options ]]
+--[[
+
+    Text Display Options
+
+--]]
 
 -- Continue indentation of wrapped lines
 vim.opt.breakindent = true
@@ -28,7 +36,11 @@ vim.opt.breakindent = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
--- [[ Search and Subsitutions ]]
+--[[
+
+    Search and Subsitutions
+
+--]]
 
 -- Case-insensitive searching unless C\ is used or the search term contains one or more capital letters
 vim.opt.ignorecase = true
@@ -37,7 +49,15 @@ vim.opt.smartcase = true
 -- Preview substitutions live, as you type! Also shows partial off-screen results in a preview window
 vim.opt.inccommand = "split"
 
--- [[ Editor Behaviour ]]
+--[[
+
+    Editor Behaviour
+
+--]]
+
+-- If performing an operation that would fail due to unsaved changes in the buffer (like ':q'),
+-- instead raise a dialog asking if you wish to save the current file(s)
+vim.opt.confirm = true
 
 -- Save undo history
 vim.opt.undofile = true
