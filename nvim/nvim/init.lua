@@ -26,6 +26,9 @@ HACK: Stuff marked with this are custom configs and code in addition to the chan
 
 --]]
 
+
+require("globals")
+
 -- HACK: Load vim.g, vim.opt, and other settings before anything else
 require("options")
 
