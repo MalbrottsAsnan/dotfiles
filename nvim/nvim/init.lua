@@ -14,6 +14,10 @@ CLIPBOARD
 
 --]]
 
+-- TODO: mini.indentscope: Check if mappings are colliding and if they should be added to mini.clue
+-- TODO: mini.map: Check mappings and autocmd
+
+
 --[[
 
     General Configuration
@@ -34,3 +38,8 @@ require("config.options")
 -- Install and configure plugins using lazy.nvim
 -- Use the ':Lazy' command to manage them!
 require("config.lazy")
+require("lazy").setup({
+    spec = {
+        { import = "plugins" },
+    },
+})

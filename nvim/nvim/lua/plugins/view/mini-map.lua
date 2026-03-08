@@ -1,18 +1,17 @@
--- Set up the mini.nvim module
-require("mini.map").setup({
-	symbols = {
-	    encode = require("mini.map").gen_encode_symbols.dot("4x2"),
-	},
-	integrations = {
-	    require("mini.map").gen_integration.builtin_search(),
-	    require("mini.map").gen_integration.gitsigns(),
-	    require("mini.map").gen_integration.diagnostic(),
-	},
-	window = {
+-- Show a floating window displaying an overview of the current buffer text
+local map = require('mini.map')
+map.setup({
+    symbols = {
+        encode = map.gen_encode_symbols.dot('4x2')
+    },
+    integrations = {
+        map.gen_integration.builtin_search(),
+        map.gen_integration.diagnostic(),
+        map.gen_integration.diff(),
+    },
+    window = {
 	    show_integration_count = false,
-
-	    -- TODO: More winblend? New colorscheme in place
-	    winblend = 10,
+	    winblend = 0,
 	},
 })
 
@@ -27,5 +26,5 @@ vim.api.nvim_create_autocmd({ "BufAdd", "BufRead", "BufNewFile" }, {
 	end,
 })
 
--- Return empty table to lazy.nvim
+-- Return empty table to lazy.nvim since the main mini.nvim module is already set up
 return {}
