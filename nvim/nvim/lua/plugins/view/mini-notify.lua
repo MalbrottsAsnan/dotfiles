@@ -1,7 +1,7 @@
 -- Show one or more highlighted notifications in a single floating window
 local notify = require('mini.notify')
 -- Modify window placement depending on MiniMap display status
-window_config = function()
+local window_config = function()
     local pad = 0
     if next(MiniMap.current.opts) then
         pad = MiniMap.current.opts.window.width
