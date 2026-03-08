@@ -14,11 +14,22 @@ CLIPBOARD
 
 --]]
 
--- General configuration
+--[[
+
+    General Configuration
+
+--]]
+
 require("config.globals")
 require("config.options")
 -- require("config.keymaps") -- Plugin-specific keymaps are managed together with the plugin configuration!
 -- require("config.autocmds")
+
+--[[
+
+    Plugin Configuration
+
+--]]
 
 -- Install and configure plugins using lazy.nvim
 -- Use the ':Lazy' command to manage them!
