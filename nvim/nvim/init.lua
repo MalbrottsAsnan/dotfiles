@@ -18,7 +18,7 @@ CLIPBOARD
 -- TODO: mini.map: Check mappings and autocmd
 -- TODO: mini.cursorword: Configure if needed
 -- TODO: mini.diff: Describe/document keymap
-
+-- TODO: mini.files: Describe/document keymap. Go through the documentation and explore new hooks
 
 --[[
 
